@@ -1,6 +1,5 @@
 http://buttersafe.com/feed/
 http://eqcomics.com/feed/
-http://feeds2.feedburner.com/virtualshackles
 http://community.livejournal.com/getfuzzyfeed/data/rss
 http://spacetrawler.com/feed/
 http://www.foxtrot.com/feed/
