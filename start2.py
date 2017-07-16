@@ -26,4 +26,5 @@ def latest_comic(rss_feed):
 for rss in rss_list[:7]:
     latest = latest_comic(rss)
     print(latest)
-    webbrowser.open_new_tab(latest)
+    if requests.head(latest).status_code < 400:
+        webbrowser.open_new_tab(latest)
