@@ -4,7 +4,6 @@ from pathlib import Path
 import socket
 import webbrowser
 
-rss_list = (Path.cwd() / "good.txt").read_text().splitlines()
 
 def latest_comic(rss_feed):
     try:
@@ -23,8 +22,15 @@ def latest_comic(rss_feed):
         if guid.startswith("http"):
             return guid
 
-for rss in rss_list[:7]:
-    latest = latest_comic(rss)
-    print(latest)
-    if requests.head(latest).status_code < 400:
-        webbrowser.open_new_tab(latest)
+
+def open_list(rss_list):
+    for rss in rss_list:
+        latest = latest_comic(rss)
+        print(latest)
+        if requests.head(latest).status_code < 400:
+            webbrowser.open_new_tab(latest)
+
+
+if __name__ == '__main__':
+    rss_list = (Path.cwd() / "good.txt").read_text().splitlines()
+    open_list(rss_list[:7])
