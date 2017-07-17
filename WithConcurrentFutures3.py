@@ -23,14 +23,21 @@ def latest_comic(rss_feed):
             return guid
 
 
+def latest_good_comic(rss_feed):
+    latest = latest_comic(rss_feed)
+    if requests.head(latest).status_code < 400:
+        return latest
+
+def show_comic(rss_feed):
+    latest = latest_good_comic(rss_feed)
+    if latest:
+        print(latest)
+        webbrowser.open_new_tab(latest)
+
+
 def open_list(rss_list):
     bob = concurrent.futures.ThreadPoolExecutor()
-    guids = bob.map(latest_comic, rss_list)
-    print(repr(guids))
-    for latest in guids:
-        print(latest)
-        if requests.head(latest).status_code < 400:
-            webbrowser.open_new_tab(latest)
+    guids = list(bob.map(show_comic, rss_list))
 
 
 if __name__ == '__main__':
