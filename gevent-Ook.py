@@ -36,6 +36,7 @@ def open_list(rss_list):
     jobs = [gevent.spawn(latest_good_comic, rss_url) for rss_url in rss_list]
     gevent.joinall(jobs)
     print([job.value for job in jobs])
+    print(len([job.value for job in jobs if job.value]))
 
 if __name__ == '__main__':
     from time import time
